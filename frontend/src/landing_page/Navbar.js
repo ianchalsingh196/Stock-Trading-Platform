@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 function Navbar() {
     return (
@@ -7,13 +8,13 @@ function Navbar() {
             style={{ backgroundColor: "#FFF" }}
         >
             <div className="container p-2">
-                <a className="navbar-brand" href="#">
+                <Link className="navbar-brand" to="/">
                     <img
                         src='media/images/logo.svg'
                         style={{ width: "25%" }}
                         alt='Logo'
                     />
-                </a>
+                </Link>
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -28,21 +29,21 @@ function Navbar() {
                     <form className="d-flex" role="search">
                         <ul className="navbar-nav mb-lg-0">
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#">
+                                <Link className="nav-link active" aria-current="page" to="/signup">
                                     Signup
-                                </a>
+                                </Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link active" href="#">About</a>
+                                <Link className="nav-link active" to="/about">About</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link active" href="#">Products</a>
+                                <Link className="nav-link active" to="/product">Products</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link active" href="#">Pricing</a>
+                                <Link className="nav-link active" to="/pricing">Pricing</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link active" href="#">Support</a>
+                                <Link className="nav-link active" to="/support">Support</Link>
                             </li>
                         </ul>
                     </form>
