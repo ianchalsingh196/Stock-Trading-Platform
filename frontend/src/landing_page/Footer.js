@@ -36,37 +36,37 @@ function Footer() {
                     </div>
                     <div className='col'>
                         <p>Company</p>
-                        <a href='' style={{ textDecoration: "none" }} >About</a>
+                        <a href='' style={{ textDecoration: "none", color: "#666",  fontSize: "18px" , fontWeight: "500"}} >About</a>
                         <br></br>
-                        <a href='' style={{ textDecoration: "none" }}>Products</a>
+                        <a href='' style={{ textDecoration: "none", color: "#666",  fontSize: "18px", fontWeight: "500" }}>Products</a>
+                        <br></br> 
+                        <a href='' style={{ textDecoration: "none", color: "#666",  fontSize: "18px", fontWeight: "500" }} >Pricing</a>
                         <br></br>
-                        <a href='' style={{ textDecoration: "none" }} >Pricing</a>
+                        <a href='' style={{ textDecoration: "none", color: "#666" ,  fontSize: "18px", fontWeight: "500"}} >Referral programme</a>
                         <br></br>
-                        <a href='' style={{ textDecoration: "none" }} >Referral programme</a>
+                        <a href='' style={{ textDecoration: "none" , color: "#666",  fontSize: "18px", fontWeight: "500"}} >Careers</a>
                         <br></br>
-                        <a href='' style={{ textDecoration: "none" }} >Careers</a>
+                        <a href='' style={{ textDecoration: "none", color: "#666",  fontSize: "18px", fontWeight: "500" }} >Zerodha.tech</a>
                         <br></br>
-                        <a href='' style={{ textDecoration: "none" }} >Zerodha.tech</a>
+                        <a href='' style={{ textDecoration: "none" , color: "#666",  fontSize: "18px", fontWeight: "500"}}>Press & media</a>
                         <br></br>
-                        <a href='' style={{ textDecoration: "none" }}>Press & media</a>
-                        <br></br>
-                        <a href='' style={{ textDecoration: "none" }}>Zerodha Cares (CSR)</a>
+                        <a href='' style={{ textDecoration: "none" , color: "#666",  fontSize: "18px", fontWeight: "500" }}>Zerodha Cares (CSR)</a>
                     </div>
                     <div className='col'>
                         <p>Support</p>
-                        <a href='' style={{ textDecoration: "none" }}>Contact us</a>
+                        <a href='' style={{ textDecoration: "none" , color: "#666",  fontSize: "18px", fontWeight: "500"}}>Contact us</a>
                         <br></br>
-                        <a href='' style={{ textDecoration: "none" }}>Support portal</a>
+                        <a href='' style={{ textDecoration: "none" , color: "#666",  fontSize: "18px", fontWeight: "500"}}>Support portal</a>
                         <br></br>
-                        <a href='' style={{ textDecoration: "none" }}> Z-Connect blog</a>
+                        <a href='' style={{ textDecoration: "none" , color: "#666",  fontSize: "18px", fontWeight: "500"}}> Z-Connect blog</a>
                         <br></br>
-                        <a href='' style={{ textDecoration: "none" }}>List of charges</a>
+                        <a href='' style={{ textDecoration: "none" , color: "#666",  fontSize: "18px", fontWeight: "500"}}>List of charges</a>
                         <br></br>
-                        <a href='' style={{ textDecoration: "none" }}>Downloads & resources</a>
+                        <a href='' style={{ textDecoration: "none" , color: "#666",  fontSize: "18px" , fontWeight: "500"}}>Downloads & resources</a>
                     </div>
                     <div className='col'>
                         <p>Account</p>
-                        <a href='' style={{ textDecoration: "none" }}>Open an accountFund transfer</a>
+                        <a href='' style={{ textDecoration: "none", color: "#666",  fontSize: "18px", fontWeight: "500"}}>Open an accountFund transfer</a>
 
                     </div>
                 </div>
@@ -80,6 +80,25 @@ function Footer() {
                     <p>
                         undergo the same process again when you approach another intermediary." Dear Investor, if you are subscribing to an IPO, there is no need to issue a cheque. Please write the Bank account number and sign the IPO application form to authorize your bank to make payment in case of allotment. In case of non allotment the funds will remain in your bank account. As a business we don't give stock tips, and have not authorized anyone to trade on behalf of others. If you find anyone claiming to be part of Zerodha and offering such services, please create a ticket here.
                     </p>
+                    <footer style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        justifyContent: "center", /* Centers the links horizontally */
+                        gap: "20px",              /* Puts 20px of space between every link */
+                        alignItems: "center",
+                        padding: "20px",
+                        fontSize: "18px"
+                    }}>
+                        <a href="#" style={{ color: "#333", textDecoration: "none", whiteSpace: "nowrap" }}>NSE</a>
+                        <a href="#" style={{ color: "#333", textDecoration: "none", whiteSpace: "nowrap" }}>BSE</a>
+                        <a href="#" style={{ color: "#333", textDecoration: "none", whiteSpace: "nowrap" }}>MCX</a>
+                        <a href="#" style={{ color: "#333", textDecoration: "none", whiteSpace: "nowrap" }}>Terms &amp; Conditions</a>
+                        <a href="#" style={{ color: "#333", textDecoration: "none", whiteSpace: "nowrap" }}>Policies and procedures</a>
+                        <a href="#" style={{ color: "#333", textDecoration: "none", whiteSpace: "nowrap" }}>Privacy Policy</a>
+                        <a href="#" style={{ color: "#333", textDecoration: "none", whiteSpace: "nowrap" }}>Disclosure</a>
+                        <a href="#" style={{ color: "#333", textDecoration: "none", whiteSpace: "nowrap" }}>For investors Attention</a>
+                        <a href="#" style={{ color: "#333", textDecoration: "none", whiteSpace: "nowrap" }}>Investors charter</a>
+                    </footer>
                 </div>
             </div>
         </footer>
