@@ -21,7 +21,6 @@ function LeftSection({
                     <a href={tryDemo} style={{textDecoration:"none"}}>Try Demo <i class="fa-solid fa-arrow-right-long"></i></a>
                     <a href={learnMore} style={{marginLeft:"50px", textDecoration:"none"}}>Learn More <i class="fa-solid fa-arrow-right-long"></i></a>
                 </div>
-
                 <div className='mt-3'>
                     <a href={googlePlay}>
                         <img src='media/images/googlePlayBadge.svg' alt='' />
@@ -30,7 +29,6 @@ function LeftSection({
                         <img src='media/images/appstoreBadge.svg' alt='' style={{marginLeft:"50px"}}/>
                     </a>
                 </div>
-
             </div>
         </div>
     </div>;
