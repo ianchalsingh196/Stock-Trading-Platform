@@ -7,7 +7,7 @@ function CreateTicket() {
                 <h1 className='fs-2 text-center'>
                     To create a ticket, select a relevant topic
                 </h1>
-                <div className='col-4 p-5 mt-5 mb-5'>
+                <div className='col-4 p-5 mt-5 mb-2'>
                     <h4 className=''>
                         <i class="fa-sharp fa-solid fa-circle-plus"></i> Account Opening
                     </h4>
@@ -27,7 +27,7 @@ function CreateTicket() {
                     <br />
                     <a href='' style={{ textDecoration: "none", lineHeight:"2.5"  }}>Getting Started</a>
                 </div>
-                <div className='col-4 p-5 mt-5 mb-5'>
+                <div className='col-4 p-5 mt-2 mb-2'>
                     <h4 className=''>
                     <i class="fa-solid fa-circle-user"></i> Your Zerodha Account
                     </h4>
@@ -41,7 +41,7 @@ function CreateTicket() {
                     <br />
                     <a href='' style={{ textDecoration: "none", lineHeight:"2.5"  }}>Transfer and conversion of shares</a>
                 </div>
-                <div className='col-4 p-5 mt-5 mb-5'>
+                <div className='col-4 p-5 mt-2 mb-2'>
                     <h4 className=''>
                         <i class="fa-solid fa-circle-user"></i> Your Zerodha Account
                     </h4>
@@ -63,7 +63,7 @@ function CreateTicket() {
                     <br />
                     <a href='' style={{ textDecoration: "none", lineHeight:"2.5"  }}>GTT</a>
                 </div>
-                <div className='col-4 p-5 mt-5 mb-5'>
+                <div className='col-4 p-5 mt-2 mb-2'>
                     <h4 className=''>
                         <i class="fa-solid fa-box"></i> Funds
                     </h4>
@@ -75,7 +75,7 @@ function CreateTicket() {
                     <br />
                     <a href='' style={{ textDecoration: "none", lineHeight:"2.5"  }}>Adding Bank Accounts</a>
                 </div>
-                <div className='col-4 p-5 mt-5 mb-5'>
+                <div className='col-4 p-5 mt-2 mb-2'>
                     <h4 className=''>
                         <i class="fa-regular fa-circle"></i> Console
                     </h4>
@@ -91,7 +91,7 @@ function CreateTicket() {
                     <br />
                     <a href='' style={{ textDecoration: "none", lineHeight:"2.5"  }}>Referral Program</a>
                 </div>
-                <div className='col-4 p-5 mt-5 mb-5'>
+                <div className='col-4 p-5 mt-2 mb-2'>
                     <h4 className=''>
                         <i class="fa-regular fa-circle"></i> Coin
                     </h4>
