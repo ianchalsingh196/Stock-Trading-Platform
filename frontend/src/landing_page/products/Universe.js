@@ -28,13 +28,13 @@ function Universe() {
                 </p>
             </div>
             <div className='col-4 p-3 mt-5'>
-                <img src="media/images/smallcaseLogo.png" alt=''style={{width:"40%"}}  />
+                <img src="media/images/tijori.svg" alt=''style={{width:"40%"}}  />
                 <p className='text-muted text-small'>
                     Asset management
                 </p>
             </div>
             <div className='col-4 p-3 mt-5'>
-                <img src="media/images/smallcaseLogo.png" alt='' style={{width:"40%"}} />
+                <img src="media/images/zerodhaFundhouse.png" alt='' style={{width:"40%"}} />
                 <p className='text-muted text-small'>
                     Fundamental research platform
                 </p>
