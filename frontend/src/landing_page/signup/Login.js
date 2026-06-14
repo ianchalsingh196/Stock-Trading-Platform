@@ -9,23 +9,26 @@ import {
   Typography,
   Container,
   Paper,
-  CircularProgress
+  CircularProgress,
+  Backdrop,
 } from "@mui/material";
 import axios from "axios";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link, useNavigate } from "react-router-dom"; // Fixed: removed unused 'redirect'
+import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const defaultTheme = createTheme();
-const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
-export default function Signup() {
-  const navigate = useNavigate();
+// Fallback values for local development
+const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const DASHBOARD_URL = process.env.REACT_APP_DASHBOARD_URL || "http://localhost:3001";
+
+export default function Login() {
   const [loading, setLoading] = useState(false);
+  const [successLoading, setSuccessLoading] = useState(false); 
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     password: "",
   });
@@ -39,35 +42,42 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); 
+    setLoading(true);
+
     try {
-      const res = await axios.post(`${API}/signup`, formData, {
+      const res = await axios.post(`${API}/login`, formData, {
         headers: { "Content-Type": "application/json" },
       });
 
-      if (res.status === 201) {
-        toast.success("Signup successful!", { position: "top-right" });
-        setFormData({ name: "", email: "", password: "" });
+      if (res.status === 200) {
+        setFormData({ email: "", password: "" });
+        
+        // Save auth data to localStorage (shared across localhost ports)
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
 
-        // Smoothly transitions over to your frontend's local login screen
+        toast.success("Login successful!", { position: "top-right" });
+        setSuccessLoading(true);
+        
+        // Redirect to your SEPARATE Dashboard application
         setTimeout(() => {
-          navigate("/login");
-        }, 2000);
+          window.location.href = DASHBOARD_URL; 
+        }, 1500);
       } else {
-        toast.error(res.data?.message || "Signup failed!");
+        toast.error(res.data?.message || "Login failed!");
       }
     } catch (err) {
-      toast.error(err.response?.data?.message || "Something went wrong!");
+      toast.error(err.response?.data?.message || "Invalid email or password!");
       console.error(err);
     } finally {
-      setLoading(false); // Safely resets UI buttons
+      setLoading(false); // Clear loading state even if request fails
     }
   };
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <ToastContainer />
-      <Container component="main" maxWidth="xs"> {/* Standardized matching form width */}
+      <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Paper
           elevation={6}
@@ -84,7 +94,7 @@ export default function Signup() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5" sx={{ mb: 2 }}>
-            Create Your Account
+            Login Your Account
           </Typography>
 
           <Box
@@ -93,19 +103,6 @@ export default function Signup() {
             onSubmit={handleSubmit}
             sx={{ mt: 1, width: "100%" }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="name"
-              label="Full Name"
-              name="name"
-              autoComplete="name"
-              value={formData.name}
-              onChange={handleChange}
-              disabled={loading}
-            />
-            
             <TextField
               margin="normal"
               required
@@ -127,7 +124,7 @@ export default function Signup() {
               label="Password"
               type="password"
               id="password"
-              autoComplete="new-password"
+              autoComplete="current-password" // Fixed: browser credentials match standard login form
               value={formData.password}
               onChange={handleChange}
               disabled={loading}
@@ -138,6 +135,7 @@ export default function Signup() {
               fullWidth
               variant="contained"
               size="large"
+              disabled={loading}
               sx={{
                 mt: 4,
                 mb: 2,
@@ -145,19 +143,26 @@ export default function Signup() {
                 textTransform: "none",
                 fontSize: "16px",
               }}
-              disabled={loading}  
             >
-              {loading ? <CircularProgress size={24} color="inherit" /> : "Sign Up"}
+              {loading ? <CircularProgress size={24} color="inherit" /> : "Login"}
             </Button>
 
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to="/login" style={{ textDecoration: 'none', color: '#1976d2', fontSize: '14px' }}>
-                  Already have an account? Sign in
+                <Link to="/signup" style={{ textDecoration: 'none', color: '#1976d2', fontSize: '14px' }}>
+                  Don't have an account? Sign up
                 </Link>
               </Grid>
             </Grid>
           </Box>
+          
+          <Backdrop
+            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={successLoading}
+          >
+            <CircularProgress color="inherit" />
+            <Typography sx={{ ml: 2 }}>Opening Trading Dashboard...</Typography>
+          </Backdrop>
         </Paper>
       </Container>
     </ThemeProvider>
