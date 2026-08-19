@@ -4,7 +4,6 @@ import {
   Button,
   CssBaseline,
   TextField,
-  Grid,
   Box,
   Typography,
   Container,
@@ -21,13 +20,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 const defaultTheme = createTheme();
 
-// Fallback values for local development
-const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const API = process.env.REACT_APP_API_URL || "http://localhost:3002";
 const DASHBOARD_URL = process.env.REACT_APP_DASHBOARD_URL || "http://localhost:3001";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
-  const [successLoading, setSuccessLoading] = useState(false); 
+  const [successLoading, setSuccessLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -41,38 +39,48 @@ export default function Login() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+  e.preventDefault();
+  setLoading(true);
 
-    try {
-      const res = await axios.post(`${API}/login`, formData, {
-        headers: { "Content-Type": "application/json" },
-      });
+  try {
+    const res = await axios.post(`${API}/login`, formData, {
+      headers: { "Content-Type": "application/json" },
+    });
 
-      if (res.status === 200) {
-        setFormData({ email: "", password: "" });
-        
-        // Save auth data to localStorage (shared across localhost ports)
-        localStorage.setItem("token", res.data.token);
+    // Flexible status & token check
+    if ((res.status === 200 || res.status === 201) && res.data?.token) {
+      
+      // 1. Save auth details first
+      localStorage.setItem("token", res.data.token);
+      if (res.data.user) {
         localStorage.setItem("user", JSON.stringify(res.data.user));
-
-        toast.success("Login successful!", { position: "top-right" });
-        setSuccessLoading(true);
-        
-        // Redirect to your SEPARATE Dashboard application
-        setTimeout(() => {
-          window.location.href = DASHBOARD_URL; 
-        }, 1500);
-      } else {
-        toast.error(res.data?.message || "Login failed!");
       }
-    } catch (err) {
-      toast.error(err.response?.data?.message || "Invalid email or password!");
-      console.error(err);
-    } finally {
-      setLoading(false); // Clear loading state even if request fails
+
+      // 2. Show success indicators
+      toast.success("Login successful!", { position: "top-right" });
+      setSuccessLoading(true);
+
+      // 3. Clear state AFTER securing token
+      setFormData({ email: "", password: "" });
+
+      // 4. Redirect to Dashboard Port 3001
+      setTimeout(() => {
+        window.location.href = DASHBOARD_URL; // "http://localhost:3001"
+      }, 1200);
+
+    } else {
+      // Handles status 200 but missing token
+      toast.error(res.data?.message || "Invalid credentials!");
     }
-  };
+  } catch (err) {
+    // Exact error message sent from Backend express controller
+    const serverMessage = err.response?.data?.message || err.response?.data?.error;
+    toast.error(serverMessage || "Invalid email or password!", { position: "top-right" });
+    console.error("Login catch block triggered:", err);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -115,7 +123,7 @@ export default function Login() {
               onChange={handleChange}
               disabled={loading}
             />
-            
+
             <TextField
               margin="normal"
               required
@@ -124,7 +132,7 @@ export default function Login() {
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password" // Fixed: browser credentials match standard login form
+              autoComplete="current-password"
               value={formData.password}
               onChange={handleChange}
               disabled={loading}
@@ -147,15 +155,30 @@ export default function Login() {
               {loading ? <CircularProgress size={24} color="inherit" /> : "Login"}
             </Button>
 
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link to="/signup" style={{ textDecoration: 'none', color: '#1976d2', fontSize: '14px' }}>
-                  Don't have an account? Sign up
-                </Link>
-              </Grid>
-            </Grid>
+            {/* Fully Centered Bottom Link */}
+            <Box
+              sx={{
+                width: "100%",
+                textAlign: "center",
+                mt: 2
+              }}
+            >
+              <Link
+                to="/signup" // Signup page mein isko "/login" kar dein
+                style={{
+                  display: "inline-block",
+                  textDecoration: "none",
+                  color: "#1976d2",
+                  fontSize: "14px",
+                  fontWeight: 500,
+                  textAlign: "center"
+                }}
+              >
+                Don't have an account? Sign up
+              </Link>
+            </Box>
           </Box>
-          
+
           <Backdrop
             sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
             open={successLoading}

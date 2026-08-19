@@ -24,14 +24,14 @@ app.post("/signup", async (req, res) => {
   try {
     const { name, email, password } = req.body;
     console.log(req.body, "req body in signup");
-    
+
     const existingUser = await UserModel.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    
+
     // FIXED: Removed 'new' and added 'await' for the Mongoose operation
     const user = await UserModel.create({
       name,
@@ -64,6 +64,8 @@ app.post("/login", async (req, res) => {
     }
 
     // generate JWT token
+    // Fallback key add karein:
+    const secretKey = process.env.JWT_SECRET || "my_backup_super_secret_key_123";
     const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, {
       expiresIn: "1h"
     });
