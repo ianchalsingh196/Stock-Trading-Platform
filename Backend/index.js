@@ -13,7 +13,13 @@ const authMiddleware = require("./middleware/auth");
 const PORT = process.env.PORT || 3002;
 const MONGO_URI = process.env.MONGO_URI;
 
-const app = express();
+const app = express({
+    origin: [
+    "https://stock-trading-platform-kohl-seven.vercel.app",
+    "https://stock-trading-platform-4c79.vercel.app"
+  ],
+  credentials: true
+});
 
 app.use(cors());
 app.use(bodyParser.json());
